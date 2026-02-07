@@ -1,0 +1,31 @@
+from django.db import models
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    address = models.TextField()
+
+    # Add this:
+    def __str__(self):
+        return self.name
+
+class Course(models.Model):
+    course_name = models.CharField(max_length=100)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+    # Add this:
+    def __str__(self):
+        return self.course_name
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    student_email = models.EmailField()
+    address = models.TextField(null=True, blank=True) # Add this line
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    # Add this:
+    def __str__(self):
+        return self.name
